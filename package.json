@@ -1,0 +1,27 @@
+{
+  "name": "thoolika-admin-angular",
+  "version": "0.0.2",
+  "description": "Client side files for Thoolika admin panel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teampumpkin/thoolika-client.git"
+  },
+  "keywords": [
+    "angular-schema-form",
+    "admin",
+    "admin-panel"
+  ],
+  "author": "Harish <harish2704@gmail.com>",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/teampumpkin/thoolika-client/issues"
+  },
+  "homepage": "https://github.com/teampumpkin/thoolika-client#readme",
+  "devDependencies": {},
+  "dependencies": { }
+}
