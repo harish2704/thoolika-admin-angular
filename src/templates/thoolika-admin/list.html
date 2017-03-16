@@ -1,0 +1,71 @@
+<div class="tab-pane active">
+  <div class="col-xs-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h5>
+          {{ activeEntity.displayName }}
+          <a ui-sref="taEdit({entityId:'$new', entityType: entityType })" class="btn btn-success pull-right">
+            New {{ activeEntity.displayName }}
+          </a>
+        </h5>
+      </div>
+      <div class="panel-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th ng-repeat="col in activeEntity.listColumns" >
+                <div class="table-search">
+                  <span> {{ col }} </span>
+                  <input type="text" ng-model="filter[col]" ta-on-enter="applyFilter(col)"  ng-hide="filter[col] === undefined" class="ta-col-filter" />
+                  <!-- <a class="glyphicon glyphicon-chevron-right" ng-click="applyFilter( col )" > </a> -->
+                </div>
+                <a class="glyphicon glyphicon-remove pull-right text-danger" ng-click="applySort(col)"> </a>
+                <a ng-click="applySort(col, sort[col] !== 1 )"
+                   class="glyphicon pull-right"
+                   ng-class="getSortIcon( col )" >
+                   <a class="glyphicon glyphicon-search pull-right text-success" ng-click="filter[col]=''" ng-show="filter[col] === undefined" > </a>
+                   <a class="glyphicon glyphicon-remove-sign pull-right text-warning" ng-click="filter[col]=undefined; applyFilter(col);" ng-hide="filter[col] === undefined" > </a>
+                </a>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in items">
+              <td scope="row" ng-repeat="col in activeEntity.listColumns" >
+                {{ item[col] }}
+              </td>
+              <td scope="row"  >
+                <div class="btn-group btn-group-xs pull-right" role="group" >
+                  <a class="btn btn-warning" ui-sref="taEdit({entityId: item._id, entityType: entityType })">
+                    <span class="glyphicon glyphicon-pencil "></span>
+                  </a>
+                  <a class="btn btn-danger" ng-click="deleteRecord(item)">
+                    <span class="glyphicon glyphicon-minus" ></span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-xs-12">
+          <div class="text-center">
+            <ul class="pagination">
+              <li ng-class="pagination.prev?'':'disable'">
+                <a aria-label="Previous" ng-click="gotoPage( pagination.prev )" >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li ng-repeat="pageItem in pagination.range" ng-class="pageItem.class"><a ng-click="gotoPage( pageItem.page )">{{ pageItem.page }}</a></li>
+              <li ng-class="pagination.next?'':'disable'">
+                <a aria-label="Next" ng-click="gotoPage( pagination.next )" >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="col-xs-2">
+  <ul class="nav nav-tabs tabs-left">
+    <li ng-class=" activeEntity==entity ? 'active':'' " ng-repeat="entity in entities" ng-click="setActiveTab(entity)" >
+      <a ui-sref="taList({entityType: entity.name})" >{{ entity.displayName }}</a>
+    </li>
+  </ul>
+</div>
+<div class="col-xs-9">
+  <div class="tab-content">
+    <ui-view></ui-view>
+  </div>
+</div> 
+

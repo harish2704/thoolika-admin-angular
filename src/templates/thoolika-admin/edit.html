@@ -1,0 +1,24 @@
+<div class="tab-pane active">
+  <div class="row ta-form-action">
+    <div class="col-xs-12 ">
+      <div class="btn-group pull-right">
+        <a type="button" class="btn btn-success">New</a>
+        <a type="button" class="btn btn-primary" ng-disabled="!mainForm.$dirty" ng-click="saveData()">Save</a>
+        <a type="button" class="btn btn-danger" ng-click="deleteRecord()" >Delete</a>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-xs-12">
+      <form
+         name="mainForm"
+         sf-schema="schemaDef"
+         sf-form="formDef"
+         sf-model="record"
+         sf-use-decorator="defaultDecorator"
+         ng-submit="saveData()"
+         class="form-horizontal" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+{
+  "name": "thoolika-client",
+  "description": "Client side files for Thoolika admin panel",
+  "main": "thoolika.js",
+  "authors": [
+    "Harish <harish2704@gmail.com>"
+  ],
+  "license": "UNLICENCED",
+  "keywords": [
+    "feathersjs",
+    "angular-schema-form",
+    "admin",
+    "admin-panel"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "angular-ui-router": "^0.3.2",
+    "bootstrap": "^3.3.7",
+    "angular-schema-form-bs-extra": "teampumpkin/angular-schema-form-bs-extra#0.2.2",
+    "lodash": "^4.16.6",
+    "angular-schema-form": "^0.8.13",
+    "angular-bootstrap": "^2.2.0",
+    "moment": "^2.16.0",
+    "angular-schema-form-bootstrap": "teampumpkin/angular-schema-form-bootstrap#0.2.0-tp.1",
+    "angular-ui-notification": "^0.3.6",
+    "angular-schema-form-ckeditor": "teampumpkin/angular-schema-form-ckeditor#0.0.2"
+  }
+}

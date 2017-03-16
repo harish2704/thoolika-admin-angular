@@ -1,0 +1,56 @@
+#ta-main{
+  margin-top: 50px;
+}
+
+#ta-main .pagination a {
+  cursor: pointer;
+}
+
+#ta-main .table-search {
+  float: left;
+}
+
+#ta-main .ui-select-match-text img {
+    width: 30px;
+}
+
+#ta-main .ui-select-choices-row img {
+    width: 30px;
+}
+
+/* Bootstrap developers recommends this procedure to fixing feedback icon */
+.form-horizontal .has-feedback .input-group .form-control-feedback {
+  right: 40px;
+}
+
+input.ta-col-filter {
+  border-radius: 0px;
+  border: black solid 1px;
+  padding: 2px 0px 2px 2px;
+  height: 20px;
+}
+
+#ta-main .schema-form-tabarray {
+  padding-top: 10px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+#ta-main .schema-form-tabarray .nav-tabs {
+  background-color: #ffc375;
+}
+
+.tabs-left>li>a{
+  text-align: right;
+}
+
+/* File upload */
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:150px;
+    height:150px;
+}
+/* File upload */
+
+

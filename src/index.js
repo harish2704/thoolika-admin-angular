@@ -1,3 +1,11 @@
+/* ഓം ബ്രഹ്മാർപ്പണം. */
+
+/*
+ * thoolika.js
+ * Created: Thu Mar 16 2017 16:13:46 GMT+0530 (IST)
+ * Copyright 2017 Harish.K<harish2704@gmail.com>
+ */
+
 /* global angular, _, feathers, Primus, localStorage, $thoolikaConfig, $, window, confirm */
 
 function logSucess(data) { window.gg = arguments; window.gg1 = data; console.log('Success: ', data); }
@@ -232,10 +240,21 @@ angular.module('thoolika.admin', ['schemaForm', 'ui.router', 'ui.bootstrap', 'as
     };
 
     this.loadData = function( $stateParams ){
-      var args = this.getSearchParams();
+      var clientsideParams = this.getSearchParams();
+      var query = {};
+      var params = {
+        query: query
+      };
+      Object.keys( clientsideParams ).forEach(function(key){
+        if( key[0] === '$' ){
+          params[ key.slice(1) ] = clientsideParams[key];
+        } else {
+          query[key] = clientsideParams[key];
+        }
+      });
       return $q.resolve()
       .then(function(){
-        return adminApp.service( $stateParams.entityType ).find(args);
+        return adminApp.service( $stateParams.entityType ).find( params );
       });
     };
 
