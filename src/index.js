@@ -162,49 +162,10 @@ angular.module('thoolika.admin', ['schemaForm', 'ui.router', 'ui.bootstrap', 'as
   }])
   .service('DbService',[ '$location', '$q', 'Notification', '$state', function($location, $q, Notification, $state ){
 
-    function getPaginationData( total, limit, skip, opts  ){
-      opts = Object.assign({
-        listLength: 3,
-        activeClass: 'active',
-        inactiveClass: 'inactive',
-      }, opts );
-      var pageNumber = Math.floor( skip/limit )+1;
-      var listLength = opts.listLength;
-      var range = [];
-      var carry = 0, i;
-      var pageCount = Math.ceil(total / limit);
-      var start = pageNumber - listLength ;
-      if (start < 1 ){
-        start = 1;
-        carry = listLength - pageNumber + 1;
-      }
-      var end =  (pageNumber + listLength  + carry);
-      if (end > pageCount  ){
-        carry = pageNumber + listLength  - pageCount;
-        end = pageCount;
-        start = (start - carry ) < 1 ? 1 : (start - carry);
-      }
-      for ( i=start; i <= end ; i++) {
-        range.push({
-          page: i,
-          class: i === pageNumber? opts.activeClass : opts.inactiveClass,
-        });
-      }
-      return {
-        next : ( pageNumber < pageCount ? pageNumber + 1 : null ),
-        prev : ( pageNumber > 1 ? pageNumber - 1 : null ),
-        currentPage : pageNumber,
-        range : range,
-        totalPages : pageCount,
-        totalItems : total,
-        limit : limit,
-        offset : skip,
-      };
-    }
 
 
     function assignPagination( res, scopeVar ){
-      var paginationData = getPaginationData( res.total, res.limit, res.skip );
+      var paginationData = GenericPaginate( res.total, res.skip, res.limit );
       Object.assign( scopeVar, paginationData );
     }
 
@@ -212,6 +173,31 @@ angular.module('thoolika.admin', ['schemaForm', 'ui.router', 'ui.bootstrap', 'as
       arr.splice(0);
       items.forEach( function(v){ arr.push(v); });
     }
+    function decodeParams( obj ){
+      return JSON.parse( decodeURIComponent(obj));
+    }
+    function encodeParams( obj ){
+      return encodeURIComponent(JSON.stringify(obj));
+    }
+
+    function saveNewData( entityType, entityId, record ){
+      return adminApp.service(entityType).create( record )
+      .then( function( newRecord ){
+        Notification.success('Created successfully');
+        $state.go('taEdit', { entityType: entityType, entityId: newRecord._id });
+      });
+    }
+
+    function updateData( entityType, entityId, record ){
+      return adminApp.service( entityType ).update( entityId, record )
+      .then( function( ){
+        Notification.success('Saved successfully');
+      });
+    }
+
+
+    this.decodeParams = decodeParams;
+    this.encodeParams = encodeParams;
 
 
     this.getSearchParams = function(){
@@ -219,24 +205,17 @@ angular.module('thoolika.admin', ['schemaForm', 'ui.router', 'ui.bootstrap', 'as
       var out = {};
       Object.keys( search ).forEach( function(key){
         if( search[key] ){
-          out[key] = this.decodeParams(search[key]);
+          out[key] = decodeParams(search[key]);
         }
-      }, this );
+      });
       return out;
     };
 
     this.setSearchParams = function( args ){
       $location.search({});
       Object.keys(args).forEach( function(key){
-        $location.search( key, this.encodeParams(args[key]) );
-      }, this );
-    };
-
-    this.decodeParams = function( obj ){
-      return JSON.parse( decodeURIComponent(obj));
-    };
-    this.encodeParams = function( obj ){
-      return encodeURIComponent(JSON.stringify(obj));
+        $location.search( key, encodeParams(args[key]) );
+      });
     };
 
     this.loadData = function( $stateParams ){
@@ -265,22 +244,6 @@ angular.module('thoolika.admin', ['schemaForm', 'ui.router', 'ui.bootstrap', 'as
         assignPagination( data, paginationVar );
       });
     };
-
-    function saveNewData( entityType, entityId, record ){
-      return adminApp.service(entityType).create( record )
-      .then( function( newRecord ){
-        Notification.success('Created successfully');
-        $state.go('taEdit', { entityType: entityType, entityId: newRecord._id });
-      });
-    }
-
-    function updateData( entityType, entityId, record ){
-      return adminApp.service( entityType ).update( entityId, record )
-      .then( function( ){
-        Notification.success('Saved successfully');
-      });
-    }
-
 
     this.deleteRecord = function( entityType, record ){
       var sure = confirm('Are you sure??');

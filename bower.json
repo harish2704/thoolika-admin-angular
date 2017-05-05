@@ -33,6 +33,7 @@
     "moment": "^2.16.0",
     "angular-schema-form-bootstrap": "teampumpkin/angular-schema-form-bootstrap#0.2.0-tp.1",
     "angular-ui-notification": "^0.3.6",
-    "angular-schema-form-ckeditor": "teampumpkin/angular-schema-form-ckeditor#0.0.2"
+    "angular-schema-form-ckeditor": "teampumpkin/angular-schema-form-ckeditor#0.0.2",
+    "generic-paginate": "^0.1.1"
   }
 }
